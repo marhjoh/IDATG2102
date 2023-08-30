@@ -7,6 +7,7 @@ class TreeFunctions {
 public:
     static void writeEveryOtherLeafNode(Node* node);
     static int countBigger(Node* node, int value);
+    static bool greaterThanChildren(Node* node);
 };
 
 #endif // TREEFUNCTIONS_H

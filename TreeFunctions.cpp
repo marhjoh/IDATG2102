@@ -42,3 +42,26 @@ int TreeFunctions::countBigger(Node* node, int value){
         }
     }
 }
+
+/**
+ * Checks whether the value of a node is greater than its children's values in a binary tree.
+ * This function recursively traverses the binary tree and ensures that a parent node's value is greater
+ * than or equal to its children's values.
+ *
+ * @param node A pointer to the node being examined in the binary tree or subtree.
+ * @return 'true' if the value of the current node is greater than or equal to its children's values,
+ *         'false' otherwise.
+ */
+bool TreeFunctions::greaterThanChildren(Node* node){
+    if(node){               //Checks if the node is a nullptr
+        if((node->left && node->ID < node->left->ID) ||
+           (node->right && node->ID < node->right->ID)) {
+            return false;   // Returns false if the node to the left or right is larger than the current node
+        }
+        else {
+            return greaterThanChildren(node->left) && //Recursively checks the tree preorder
+                   greaterThanChildren(node->right);
+        }
+    } else
+    return true;            // Returns true if you have gone through the whole thing without errors
+}
