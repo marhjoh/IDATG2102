@@ -11,6 +11,8 @@ public:
     static void isCompleteTree(Node* node);
     static int countLeafNodes(Node* node);
     static void mirrorTree(Node* node);
+    static Node* convertListToBBT(int len);
+    static Node* transformBTToList(Node* node);
 };
 
 #endif // TREEFUNCTIONS_H

@@ -135,3 +135,57 @@ void TreeFunctions::mirrorTree(Node* node) {
     }
 }
 
+/**
+ * Converts a sorted linked list into a Balanced Binary Tree (BBT).
+ *
+ * @param len The length of the linked list segment to be converted.
+ * @return A pointer to the root of the Balanced Binary Tree.
+ */
+Node* TreeFunctions::convertListToBBT(int len) {
+    if (len == 0) {
+        return nullptr;
+    }
+
+    // Recursively convert the left half of the linked list
+    Node* left = convertListToBBT(len / 2);
+
+    Node* head = root;   // Store the current root
+    head->prev_left = left;
+    root = root->next_right; // Move root to the next node
+
+    // Recursively convert the right half of the linked list
+    Node* right = convertListToBBT(len - (len / 2) - 1);
+    head->next_right = right;
+
+    return head;
+}
+
+/**
+ * Transforms a binary tree to a doubly linked list while maintaining the order of nodes.
+ *
+ * @param node A pointer to the root of the binary tree or subtree to be transformed.
+ * @return A pointer to the head of the transformed doubly linked list.
+ */
+Node* TreeFunctions::transformBTToList(Node* node) {
+    if (node->prev_left != nullptr) {
+        // Recursively transform the left subtree and find the last node
+        Node* prev = transformBTToList(node->prev_left);
+        while (prev->next_right != nullptr)
+            prev = prev->next_right;
+
+        // Adjust pointers to connect the previous node's next to the current node
+        prev->next_right = node;
+        node->prev_left = prev;
+    }
+    if (node->next_right != nullptr) {
+        // Recursively transform the right subtree and find the first node
+        Node* next = transformBTToList(node->next_right);
+        while (next->prev_left != nullptr)
+            next = next->prev_left;
+
+        // Adjust pointers to connect the next node's previous to the current node
+        next->prev_left = node;
+        node->next_right = next;
+    }
+    return node;
+}
