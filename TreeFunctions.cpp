@@ -118,3 +118,20 @@ int TreeFunctions::countLeafNodes(Node* node) {
     return countLeafNodes(node->left) + countLeafNodes(node->right);
 }
 
+/**
+ * Mirrors a binary tree by swapping the left and right subtrees of each node.
+ * This function recursively traverses the binary tree and swaps the left and right subtrees of each node,
+ * effectively creating a mirror image of the original tree.
+ *
+ * @param node A pointer to the node being processed in the binary tree or subtree.
+ */
+void TreeFunctions::mirrorTree(Node* node) {
+    if (node != nullptr) {
+        Node* tmp = node->left;    // Store a temporary copy of the left subtree
+        node->left = node->right;  // Swap the left and right subtrees
+        node->right = tmp;         // Set the right subtree to the temporary left subtree
+        mirror(node->left);        // Recursively mirror the left subtree
+        mirror(node->right);       // Recursively mirror the right subtree
+    }
+}
+
