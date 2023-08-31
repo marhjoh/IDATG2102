@@ -130,8 +130,8 @@ void TreeFunctions::mirrorTree(Node* node) {
         Node* tmp = node->left;    // Store a temporary copy of the left subtree
         node->left = node->right;  // Swap the left and right subtrees
         node->right = tmp;         // Set the right subtree to the temporary left subtree
-        mirror(node->left);        // Recursively mirror the left subtree
-        mirror(node->right);       // Recursively mirror the right subtree
+        mirrorTree(node->left);        // Recursively mirror the left subtree
+        mirrorTree(node->right);       // Recursively mirror the right subtree
     }
 }
 
