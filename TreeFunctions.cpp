@@ -103,3 +103,18 @@ void TreeFunctions::isCompleteTree(Node* node) {
         gLevel--; // Decrement the level as we move back up the tree
     }
 }
+
+/**
+ * Counts the number of leaf nodes in a binary tree.
+ *
+ * @param node A pointer to the node being examined in the binary tree or subtree.
+ * @return The count of leaf nodes in the binary tree or subtree.
+ */
+int TreeFunctions::countLeafNodes(Node* node) {
+    if(node == nullptr)
+        return 0;
+    if(node->left == nullptr && node->right == nullptr)
+        return 1;
+    return countLeafNodes(node->left) + countLeafNodes(node->right);
+}
+

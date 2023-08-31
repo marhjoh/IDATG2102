@@ -9,6 +9,7 @@ public:
     static int countBigger(Node* node, int value);
     static bool greaterThanChildren(Node* node);
     static void isCompleteTree(Node* node);
+    static int countLeafNodes(Node* node)
 };
 
 #endif // TREEFUNCTIONS_H
