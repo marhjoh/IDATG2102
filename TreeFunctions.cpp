@@ -2,7 +2,13 @@
 #include <iostream>
 using namespace std;
 
-bool wrote = false;
+// Parameters
+bool wrote = false;          // A flag indicating whether a node has been printed or not.
+int gLevel = -1;             // The current level of the node or nullptr being processed.
+bool gCompleteTree = true;   // A flag indicating whether the tree is considered complete or not.
+int gDepth = 0;              // The maximum depth to which nodes are being checked.
+bool gLevelUp = false;       // A flag indicating if the traversal has gone up a level at least once.
+
 
 /**
  * Traverses a binary tree and writes the ID of every other leaf node in a top-down manner.
@@ -64,4 +70,36 @@ bool TreeFunctions::greaterThanChildren(Node* node){
         }
     } else
     return true;            // Returns true if you have gone through the whole thing without errors
+}
+
+
+/**
+ * Checks if a binary tree is a complete tree, considering the levels and depths of its nodes.
+ * This function traverses the binary tree in a postorder manner while comparing levels and depths of nodes
+ * to determine if the tree meets the criteria of a complete tree. A complete tree is defined as a tree where
+ * all levels are fully filled except possibly for the last level, which is filled left to right.
+ *
+ * @param node A pointer to the node being examined in the binary tree or subtree.
+ */
+void TreeFunctions::isCompleteTree(Node* node) {
+    if(node && gCompleteTree) {
+        gLevel++; // Increment the level as we are traversing down the tree initially
+        if(gDepth < gLevel) { // If depth is less than the current level, increase depth by 1
+            gDepth += 1; // Set the depth if the current leaf node is the lowest
+            if(!(node->left && node->right) && !gLevelUp) // At the first leaf node, start
+                gLevelUp = true; // traversing back up the tree
+        }
+        isCompleteTree(node->right); // Traverse right, then left in a postorder manner recursively
+        isCompleteTree(node->left);
+
+        if((!node->left && node->right) // If there's a node to the right but not left at any point,
+           // it's not a complete tree since it must be filled from the left
+           || ((!node->left || !node->right) && (gLevel < gDepth-1)) // If the node lacks children and is one level above
+           // the depth, it's not a complete tree
+           || (gLevelUp && !node->right && node->left)) {
+            gCompleteTree = false; // Set gCompleteTree to false since the tree is not complete
+            return;
+        }
+        gLevel--; // Decrement the level as we move back up the tree
+    }
 }
