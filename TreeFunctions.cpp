@@ -9,7 +9,6 @@ bool gCompleteTree = true;   // A flag indicating whether the tree is considered
 int gDepth = 0;              // The maximum depth to which nodes are being checked.
 bool gLevelUp = false;       // A flag indicating if the traversal has gone up a level at least once.
 
-
 /**
  * Traverses a binary tree and writes the ID of every other leaf node in a top-down manner.
  * A leaf node is a node with no left or right child. The writing starts from the rightmost leaf node
@@ -189,3 +188,46 @@ Node* TreeFunctions::transformBTToList(Node* node) {
     }
     return node;
 }
+
+/**
+ * Traverses and prints the IDs of the nodes along the rightmost path of the binary tree.
+ */
+void TreeFunctions::rightmostPathTraversal() {
+    Node* node = root; // Start traversal from the root node
+    while (node != z) { // Traverse until the sentinel node 'z' is encountered
+        cout << node->ID << ' '; // Print the ID of the current node
+        node = (node->right != z) ? node->right : node->left; // Move to the right child if it's not 'z',
+                                                                // otherwise move to the left child
+    }
+}
+
+/**
+ * Prints the path from a specified node's value to the root of the binary tree.
+ *
+ * @param node A pointer to the node from which the path to the root is to be printed.
+ */
+void TreeFunctions::printPathToRoot(Node* node) {
+    int id = node->ID;
+    node = root;
+    while (node != z) {
+        cout << node->ID << ' '; // Print the value of the current node in the path
+        node = (id < node->ID) ? node->left : node->right; // Move up the tree based on comparison
+    }
+}
+
+/**
+ * Recursively prints the paths from each leaf node's value to the root of the binary tree.
+ *
+ * @param p A pointer to the node from which the paths to the root are to be printed.
+ */
+void TreeFunctions::printPathsToRootFromLeaves(Node* node) {
+    if (node != z) {
+        if (node->left == z && node->right == z) {
+            printPathToRoot(node); // If the node is a leaf, print the path to the root
+            cout << '\n';
+        }
+        printPathsToRootFromLeaves(node->left);  // Recursively print paths from the left subtree
+        printPathsToRootFromLeaves(node->right); // Recursively print paths from the right subtree
+    }
+}
+

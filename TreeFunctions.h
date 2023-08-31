@@ -13,6 +13,9 @@ public:
     static void mirrorTree(Node* node);
     static Node* convertListToBBT(int len);
     static Node* transformBTToList(Node* node);
+    static void rightmostPathTraversal();
+    static void printPathToRoot(Node* node);
+    static void printPathsToRootFromLeaves(Node* node);
 };
 
 #endif // TREEFUNCTIONS_H
