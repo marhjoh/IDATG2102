@@ -17,6 +17,7 @@ public:
     static void printPathToRoot(Node* node);
     static void printPathsToRootFromLeaves(Node* node);
     static bool isHeapOrdered(Node* node);
+    static void insert(int v);
     };
 
 #endif // TREEFUNCTIONS_H

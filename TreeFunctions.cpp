@@ -257,4 +257,20 @@ bool TreeFunctions::isHeapOrdered(Node* node) {
     }
 }
 
-
+/**
+ * Inserts a new node with the given value into the binary search tree.
+ *
+ * @param value The value to be inserted into the tree.
+ */
+void TreeFunctions::insert(int value) {
+    Node* p, *x;
+    p = root; x = root->right;
+    // Traverse the tree to find the appropriate position for the new node
+    while(x != z) {
+        p = x; x = (value < x->ID) ? x->left : x->right;
+    }
+    // Create a new node with the given value and set left and right pointers to sentinel node z
+    x = new Node(value, z, z);
+    // Attach the new node to the appropriate position in the tree
+    if(value < p->ID) p->left = x; else p->right = x;
+}
