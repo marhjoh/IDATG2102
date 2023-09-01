@@ -231,3 +231,30 @@ void TreeFunctions::printPathsToRootFromLeaves(Node* node) {
     }
 }
 
+/**
+ * Checks if a binary tree is heap-ordered.
+ * A binary tree is considered heap-ordered if for every node 'node', the value of 'node' is greater than
+ * or equal to the values of its children.
+ *
+ * @param node A pointer to the node being checked in the binary tree or subtree.
+ * @return True if the tree is heap-ordered, otherwise false.
+ */
+bool TreeFunctions::isHeapOrdered(Node* node) {
+    if (node != z) { // If the node is not null
+        // Check if the left child exists and has a greater value than the current node
+        if (node->left != nullptr && node->left->ID > node->ID)
+            return false;
+
+        // Check if the right child exists and has a greater value than the current node
+        if (node->right != nullptr && node->right->ID > node->ID)
+            return false;
+
+        // Recursively check the left and right subtrees
+        return (isHeapOrdered(node->left) && isHeapOrdered(node->right));
+    } else {
+        // If the node is null, it's considered heap-ordered
+        return true;
+    }
+}
+
+
