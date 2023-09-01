@@ -274,3 +274,57 @@ void TreeFunctions::insert(int value) {
     // Attach the new node to the appropriate position in the tree
     if(value < p->ID) p->left = x; else p->right = x;
 }
+
+/**
+ * Performs an in-order traversal of the binary search tree.
+ *
+ * @param p The root node of the tree or subtree to traverse.
+ */
+void TreeFunctions::inOrderTraverse(Node* p) {
+    if (p != z) {
+        // Traverse the left subtree
+        inOrderTraverse(p->left);
+
+        // Process the current node
+        cout << ' ' << p->ID;
+
+        // Traverse the right subtree
+        inOrderTraverse(p->right);
+    }
+}
+
+/**
+ * Performs a pre-order traversal of the binary search tree.
+ *
+ * @param p The root node of the tree or subtree to traverse.
+ */
+void TreeFunctions::preOrderTraverse(Node* p) {
+    if (p != z) {
+        // Process the current node before traversing subtrees
+        cout << ' ' << p->ID;
+
+        // Traverse the left subtree
+        preOrderTraverse(p->left);
+
+        // Traverse the right subtree
+        preOrderTraverse(p->right);
+    }
+}
+
+/**
+ * Performs a post-order traversal of the binary search tree.
+ *
+ * @param p The root node of the tree or subtree to traverse.
+ */
+void TreeFunctions::postOrderTraverse(Node* p) {
+    if (p != z) {
+        // Traverse the left subtree
+        postOrderTraverse(p->left);
+
+        // Traverse the right subtree
+        postOrderTraverse(p->right);
+
+        // Process the current node after traversing subtrees
+        cout << ' ' << p->ID;
+    }
+}

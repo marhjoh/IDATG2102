@@ -18,6 +18,9 @@ public:
     static void printPathsToRootFromLeaves(Node* node);
     static bool isHeapOrdered(Node* node);
     static void insert(int v);
+    static void postOrderTraverse(Node* p);
+    static void inOrderTraverse(Node* p);
+    static void preOrderTraverse(Node* p);
     };
 
 #endif // TREEFUNCTIONS_H
