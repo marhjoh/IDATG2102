@@ -36,7 +36,7 @@ bool check1() {
     return true;
 }
 
-// Everything went well (no prefixes), return true.
+/* Everything went well (no prefixes), return true.
 
 // Method 2 - Algorithm:
 // Sort all the numbers (converted to strings) lexicographically.
@@ -60,10 +60,11 @@ bool check2() {
 
     return true;
 }
+*/
 
 int main() {
     cout << (check1() ? "OK" : "NOT OK") << "\n\n";
-    cout << (check2() ? "OK" : "NOT OK") << "\n\n";
+    //cout << (check2() ? "OK" : "NOT OK") << "\n\n";
     return 0;
 }
 
